@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>MAA</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">MAA - My Advertising App</span>
+        </div>
+      </nav>
+      <br>
+      {% csrf_token %}
+    <h1 style="text-align:center;">Welcome to MAA</h1><br>
+    <a href = "{% url 'create'%}" class = "btn btn-lg btn-success" style='margin-left:820px'>Create</a>
+    <a href = "{% url 'logout'%}" class = "btn btn-lg btn-success" style='margin-left:56px'>Logout</a>
+    <br>
+    <hr>
+    <br>
+    {% for x in img %}
+    {% if forloop.first %}<div class="row ">{% endif %}
+    <div class="col-lg-4 col-md-4 col-12" >
+    <div class="text-center mt-2">
+        <img src="{{x.image.url}}" height="70%" width="70%" class="img-thumbnail" alt="...">
+        <h2 class="text-center" >{{x.caption}}</h2></div>
+        <!-- you can add a text area to add comments over here and a delete button-->
+        <label for="{% comment "" %}{% endcomment %}" >Comments : </label>
+          <textarea name = "comment" id="comment" cols="50" rows="3"></textarea>
+          <br><br>
+          <a  class="btn btn-outline-danger"
+							href="{% url 'delete_contact' x.id %}"><b>Delete</b></a>
+    </div>
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class=row>{% endif %}
+        {% if forloop.last %}</div>{% endif %}
+
+    {% endfor %}
+
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
